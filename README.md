@@ -11,3 +11,4 @@ Budget Analysis: Once expenses are added, the app provides a spending report, sh
 Interactivity: Users can navigate between different pages of the app, add multiple expenses, and get a detailed breakdown of their spending.
 
 User-Friendly: The design is intuitive, with easy-to-use input fields, dropdowns, and clear buttons, making it accessible
+<img width="1116" height="612" alt="image" src="https://github.com/user-attachments/assets/f7d073d4-b7a0-424e-8df0-9dfd8bf6f028" />
