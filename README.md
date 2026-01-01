@@ -12,3 +12,4 @@ Interactivity: Users can navigate between different pages of the app, add multip
 
 User-Friendly: The design is intuitive, with easy-to-use input fields, dropdowns, and clear buttons, making it accessible
 <img width="1116" height="612" alt="image" src="https://github.com/user-attachments/assets/f7d073d4-b7a0-424e-8df0-9dfd8bf6f028" />
+<img width="1086" height="845" alt="image" src="https://github.com/user-attachments/assets/58bf492d-40fc-437e-97e1-47f3c95382f9" />
