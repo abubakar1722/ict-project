@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Budget Buddy - Page 2</title>
+<style>
+body {
+font-family: 'Segoe UI', Arial, sans-serif;
+background-color: #f0f2f5;
+padding: 20px;
+text-align: left;
+color: #333;
+}
+.container {
+max-width: 650px;
+background: white;
+padding: 30px;
+border-radius: 15px;
+box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+margin: auto;
+}
+h2 { color: #4e54c8; }
+button { width: 100%; padding: 12px; background: #4e54c8; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+</style>
+</head>
+<body>
+<div class="container">
+<h2>📝 Add Expenses</h2>
+<label>What are you buying?</label>
+<input type="text" id="nameInput" placeholder="e.g. Hostel Rent">
+<label>Category:</label>
+<select id="catInput">
+<option value="essential">🟢 Essential (Needs)</option>
+<option value="non-essential">🔴 Non-Essential (Wants)</option>
+</select>
+<label>Cost (PKR per time):</label>
+<input type="number" id="costInput" placeholder="Rs.">
+<label>How often?</label>
+<select id="freqInput">
+<option value="once">Only Once</option>
+<option value="daily">Every Day</option>
+<option value="weekdays">Weekdays (Mon-Fri)</option>
+<option value="weekends">Weekends Only</option>
+<option value="weekly">Once a Week</option>
+<option value="twice-week">Twice a Week</option>
+</select>
+<button onclick="addItem()">Add to List +</button>
+<hr>
+<div id="currentList" style="max-height: 150px; overflow-y: auto; font-size: 14px;"></div>
+<button onclick="window.location.href='page3.html'" style="background: #636e72;">Analyze My Spending ➜</button>
+</div>
+<script>
+function addItem() {
+let name = document.getElementById("nameInput").value;
+let cat = document.getElementById("catInput").value;
+let cost = parseFloat(document.getElementById("costInput").value);
+let freq = document.getElementById("freqInput").value;
+let duration = localStorage.getItem("duration");
+if (!name || !cost) { alert("Missing name or cost!"); return; }
+let multi = 1;
+if (duration === "month") {
+let map = {once:1, daily:30, weekdays:22, weekends:8, weekly:4, 'twice-week':8};
+multi = map[freq];
+} else {
+let map = {once:1, daily:7, weekdays:5, weekends:2, weekly:1, 'twice-week':2};
+multi = map[freq];
+}
+let totalCost = cost * multi;
+let expenses = JSON.parse(localStorage.getItem("expenses"));
+expenses.push({ name, cat, totalCost });
+localStorage.setItem("expenses", JSON.stringify(expenses));
+document.getElementById("currentList").innerHTML += "<p>Added: " + name + " (Rs. " + totalCost + ")</p>";
+document.getElementById("nameInput").value = "";
+document.getElementById("costInput").value = "";
+}
+</script>
+</body>
+</html>
