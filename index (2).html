@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Budget Buddy - Page 1</title>
+<style>
+body {
+font-family: 'Segoe UI', Arial, sans-serif;
+background-color: #f0f2f5;
+padding: 20px;
+text-align: left;
+color: #333;
+}
+.container {
+max-width: 650px;
+background: white;
+padding: 30px;
+border-radius: 15px;
+box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+margin: auto;
+}
+h1 { color: #4e54c8; }
+button { width: 100%; padding: 12px; background: #4e54c8; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎓 Budget Buddy</h1>
+<p>Plan your student life in PKR.</p>
+<label>Total Budget Amount (Rs.):</label>
+<input type="number" id="budgetInput" placeholder="Enter total money e.g. 20000">
+<label>Planning Duration:</label>
+<select id="durationInput">
+<option value="month">One Full Month</option>
+<option value="week">One Week</option>
+</select>
+<button onclick="saveAndGo()">Start Planning ➜</button>
+</div>
+<script>
+function saveAndGo() {
+let budget = document.getElementById("budgetInput").value;
+let duration = document.getElementById("durationInput").value;
+if (budget > 0) {
+localStorage.setItem("budget", budget);
+localStorage.setItem("duration", duration);
+localStorage.setItem("expenses", JSON.stringify([])); // Clear list for new start
+window.location.href = "page2.html";
+} else {
+alert("Please enter your budget first!");
+}
+}
+</script>
+</body>
+</html>
