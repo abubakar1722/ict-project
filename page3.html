@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Budget Buddy - Page 3</title>
+<style>
+body {
+font-family: 'Segoe UI', Arial, sans-serif;
+background-color: #f0f2f5;
+padding: 20px;
+text-align: left;
+color: #333;
+}
+.container {
+max-width: 650px;
+background: white;
+padding: 30px;
+border-radius: 15px;
+box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+margin: auto;
+}
+h2 { color: #4e54c8; }
+.wise-high { color: #1b5e20; background: #e8f5e9; font-weight: bold; padding: 5px; border-radius: 4px; }
+.wise-med { color: #2ecc71; font-weight: bold; }
+.caution { color: #f39c12; font-weight: bold; }
+.unwise-red { color: #e74c3c; background: #fdeaea; font-weight: bold; text-decoration: underline; padding: 5px; border-radius: 4px; }
+.stat-box { padding: 15px; background: #f8f9fa; border-left: 5px solid #4e54c8; margin-bottom: 15px; border-radius: 5px; }
+.danger-box { border-left: 5px solid #e74c3c; background: #fff5f5; color: #e74c3c; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { border-bottom: 1px solid #ddd; padding: 12px; text-align: left; }
+th { background: #f4f4f4; }
+button { width: 100%; padding: 12px; background: #333; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+</style>
+</head>
+<body onload="runReport()">
+<div class="container">
+<h2>📊 Spending Report</h2>
+<div class="stat-box">
+<p>Initial Budget: Rs. <span id="resBudget"></span></p>
+<p>Total Savings: Rs. <span id="resSavings" style="font-weight:bold; color:green;"></span></p>
+</div>
+<div id="exceededRow" class="stat-box danger-box" style="display:none">
+<p>🚨 <b>BUDGET EXCEEDED BY:</b> Rs. <span id="resExceeded"></span></p>
+</div>
+<table>
+<thead><tr><th>Item</th><th>Verdict</th><th>Reason</th></tr></thead>
+<tbody id="resultTableBody"></tbody>
+</table>
+<div id="adviceArea" style="margin-top:20px; padding:15px; border-radius:8px; background:#eef2ff;"></div>
+<button onclick="window.location.href='index.html'">Start New Plan</button>
+</div>
+<script>
+function runReport() {
+let budget = parseFloat(localStorage.getItem("budget"));
+let duration = localStorage.getItem("duration");
+let expenses = JSON.parse(localStorage.getItem("expenses"));
+let totalSpent = 0;
+expenses.forEach(x => totalSpent += x.totalCost);
+let savings = budget - totalSpent;
+if (savings < 0) {
+let exceeded = Math.abs(savings);
+savings = 0;
+document.getElementById("exceededRow").style.display = "block";
+document.getElementById("resExceeded").innerText = exceeded;
+}
+document.getElementById("resBudget").innerText = budget;
+document.getElementById("resSavings").innerText = savings;
+let tableBody = document.getElementById("resultTableBody");
+expenses.forEach(x => {
+let verdict = ""; let vClass = ""; let reason = "";
+if (x.cat === "essential") {
+verdict = "Very Wise"; vClass = "wise-high"; reason = "Necessity";
+} else {
+if (duration === "month" && x.totalCost > 5000) {
+verdict = "Not Wise"; vClass = "unwise-red"; reason = "Want > 5000 Rs.";
+} else if (x.totalCost > (budget * 0.15)) {
+verdict = "Caution"; vClass = "caution"; reason = "High Budget %";
+} else {
+verdict = "Fair Choice"; vClass = "wise-med"; reason = "Manageable";
+}
+}
+tableBody.innerHTML += `<tr><td>${x.name}</td><td class="${vClass}">${verdict}</td><td>${reason}</td></tr>`;
+});
+if (duration === "month" && savings > 0) {
+document.getElementById("adviceArea").innerHTML = "<b>💡 Advice:</b> Weekly safe limit: Rs. " + (savings/4).toFixed(0);
+}
+}
+</script>
+</body>
+</html>
