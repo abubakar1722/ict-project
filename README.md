@@ -15,6 +15,8 @@ User-Friendly: The design is intuitive, with easy-to-use input fields, dropdowns
 <img width="1086" height="845" alt="image" src="https://github.com/user-attachments/assets/58bf492d-40fc-437e-97e1-47f3c95382f9" />
 <img width="1098" height="644" alt="image" src="https://github.com/user-attachments/assets/6b6e5835-397a-4e0a-8926-fac555a008f9" />
 group member         
-minahil amir  25090100 
+minahil amir  250901026
+
 aliha rana    250901030
+
 abubakar      2509101008
