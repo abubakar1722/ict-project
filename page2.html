@@ -21,6 +21,20 @@ margin: auto;
 h2 { color: #4e54c8; }
 button { width: 100%; padding: 12px; background: #4e54c8; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+.add-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  background-color: #43a047;
+  transform: scale(1.05);
+}
 </style>
 </head>
 <body>
@@ -44,7 +58,7 @@ input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #cc
 <option value="weekly">Once a Week</option>
 <option value="twice-week">Twice a Week</option>
 </select>
-<button onclick="addItem()">Add to List +</button>
+<button class="add-btn" onclick="addItem()">Add to List +</button>
 <hr>
 <div id="currentList" style="max-height: 150px; overflow-y: auto; font-size: 14px;"></div>
 <button onclick="window.location.href='page3.html'" style="background: #636e72;">Analyze My Spending ➜</button>
@@ -75,4 +89,5 @@ document.getElementById("costInput").value = "";
 }
 </script>
 </body>
+
 </html>
